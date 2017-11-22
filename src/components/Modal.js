@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import Backdrop from "./Backdrop"
 
 class Modal extends Component {
   static propTypes = {
@@ -29,7 +30,7 @@ class Modal extends Component {
 
   render() {
     let {
-      baseClassName = "modal",
+      baseClassName = "x-modal",
       title,
       close = true,
       children
@@ -37,8 +38,9 @@ class Modal extends Component {
 
     return (
       <div>
+        <Backdrop {...this.props}/>
         <div
-          className={`${baseClassName} fade show`}
+          className={baseClassName}
           tabIndex="-1"
           role="dialog"
           style={{display: "block"}}
@@ -51,16 +53,16 @@ class Modal extends Component {
           >
             <div className={`${baseClassName}-content`}>
                <div className={`${baseClassName}-header`}>
-                {title && <h5 className={`${baseClassName}-title`}>{title}</h5>}
                 {close !== false && (
                   React.isValidElement(close)
                     ? React.cloneElement(close, {onClick: this.close})
                     : (
-                        <button type="button" className="close" onClick={this.close}>
+                        <button type="button" className={`${baseClassName}-close`} onClick={this.close}>
                           <span>&times;</span>
                         </button>
                     )
                 )}
+                {title && <h5 className={`${baseClassName}-title`}>{title}</h5>}
               </div>
               <div className={`${baseClassName}-body`}>
                 {children}
@@ -68,7 +70,6 @@ class Modal extends Component {
             </div>
           </div>
         </div>
-        <div className={`${baseClassName}-backdrop fade show`}></div>
       </div>
     )
   }
