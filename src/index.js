@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { render} from "react-dom"
 import Modal from "./components/Modal"
 import Alert from "./components/Alert"
+import TextEdit from "./components/TextEdit"
 import "./index.less"
 
 class App extends Component {
@@ -20,6 +21,13 @@ class App extends Component {
         <div>
           <button onClick={() => this.setState({modal: true})}>Modal</button>
           <button onClick={() => this.setState({alert: true})}>Alert</button>
+        </div>
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          =&gt;<TextEdit
+            onChange={(value) => console.log('blur->', value)}
+            onBlur={(value) => console.log('blur->', value)}
+          />&lt;=
         </div>
         {this.state.modal && (
           <Modal

@@ -53,16 +53,16 @@ class Modal extends Component {
           >
             <div className={`${baseClassName}-content`}>
                <div className={`${baseClassName}-header`}>
+                {title && <h5 className={`${baseClassName}-title`}>{title}</h5>}
                 {close !== false && (
                   React.isValidElement(close)
                     ? React.cloneElement(close, {onClick: this.close})
                     : (
-                        <button type="button" className={`${baseClassName}-close`} onClick={this.close}>
+                        <button type="button" className="close" onClick={this.close}>
                           <span>&times;</span>
                         </button>
                     )
                 )}
-                {title && <h5 className={`${baseClassName}-title`}>{title}</h5>}
               </div>
               <div className={`${baseClassName}-body`}>
                 {children}

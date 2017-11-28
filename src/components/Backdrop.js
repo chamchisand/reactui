@@ -1,10 +1,11 @@
 import React, { Component } from "react"
+import { createPortal } from "react-dom"
 import PropTypes from "prop-types"
 
 class Backdrop extends Component {
   static propTypes = {
     baseClassName: PropTypes.string,
-    backdrop: PropTypes.bool
+    backdrop: PropTypes.bool,
   }
 
   render() {
@@ -14,7 +15,10 @@ class Backdrop extends Component {
       return null
     }
 
-    return <div className={baseClassName}></div>
+    return createPortal(
+      <div className={baseClassName}></div>,
+      document.body
+    )
   }
 }
 

@@ -5,15 +5,16 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: #000;
+  background-color: black;
   opacity: 0.5;
 }
 
 .x-alert {
   width: 400px;
   border: solid 1px orange;
-  background-color: #fff;
+  background-color: white;
   position: fixed;
+  z-index: 999;
 
   .x-alert-content {
     padding: 10px;
@@ -28,8 +29,9 @@
   .x-modal-dialog {
     width: 400px;
     border: solid 1px orange;
-    background-color: #fff;
+    background-color: white;
     position: fixed;
+    z-index: 999;
   }
 
   .x-modal-content {
@@ -37,18 +39,30 @@
 
   .x-modal-header {
     padding: 20px;
-    border-bottom: solid 1px #ccc;
-  }
+    border-bottom: solid 1px grey;
+    position: relative;
 
-  .x-modal-title {
-    margin: 0;
-  }
+    .x-modal-title {
+      margin: 0;
+    }
 
-  .x-modal-close {
-    float: right;
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
   }
 
   .x-modal-body {
     padding: 20px;
   }
+}
+
+.editable {
+  min-width: 40px;
+  height: 15px;
+  display: inline-block;
+  border-bottom: dashed 1px grey;
+  background-color: lightgrey;
+  cursor: pointer;
 }
