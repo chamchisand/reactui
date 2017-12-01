@@ -4,10 +4,11 @@ const webpack = require("webpack")
 module.exports = {
   devtool: "inline-source-map",
   entry: {
-    index: ["babel-polyfill", "./src/index.js"]
+    index: ["babel-polyfill", "./src/index.js"],
+    typing: ["babel-polyfill", "./src/typing.js"]
   },
   output: {
-    path: path.join(__dirname, "build/js"),
+    path: path.join(__dirname, "build"),
     pathinfo: true,
     filename: "[name].js",
     publicPath: "/"
@@ -64,9 +65,9 @@ module.exports = {
   ]),
   devServer: {
     contentBase: path.join(__dirname, "build"),
-    index: "index.html",
-    port: 9000,
-    hot: true
+    compress: true,
+    port: 9000
+    // hot: true
   },
   performance: {
     hints: false

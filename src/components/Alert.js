@@ -29,7 +29,7 @@ class Alert extends Component {
       baseClassName = "x-alert",
       title,
       message,
-      ok = "OK",
+      ok = "OK!",
       cancel = "Cancel"
     } = this.props
 

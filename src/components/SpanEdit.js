@@ -5,7 +5,7 @@ class TextEdit extends Component {
   static propTypes = {
     name: PropTypes.string,
     value: PropTypes.string,
-    inputClassName: PropTypes.string,
+    className: PropTypes.string,
     textClassName: PropTypes.string,
     onChange: PropTypes.func,
     onBlur: PropTypes.func
@@ -13,7 +13,26 @@ class TextEdit extends Component {
 
   constructor(props) {
     super(props)
-    this.state = { editable: false }
+
+    this.state = {
+      editable: false,
+      value: this.props.value
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.state.editable) {
+      // weird! but it will move cursor to end
+      this.textInput.value = ""
+      this.textInput.value = this.state.value
+      this.textInput.focus()
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.value !== this.state.value) {
+      this.setState({ value: nextProps.value })
+    }
   }
 
   setEditMode(editable) {
@@ -30,18 +49,21 @@ class TextEdit extends Component {
     if (this.props.onBlur) {
       this.props.onBlur(e.target.value)
     }
+
+    this.setState({ value: e.target.value })
     this.setEditMode(false)
   }
 
   render() {
-    let { name, value, inputClassName, textClassName ="editable" } = this.props
+    let { name, className, textClassName ="editable" } = this.props
 
     if (this.state.editable) {
       return <input
+        ref={(input) => this.textInput = input}
         type="text"
-        className={inputClassName}
+        className={className}
         name={name}
-        defaultValue={value}
+        defaultValue={this.state.value}
         onChange={e => this.handleChange(e)}
         onBlur={e => this.handleBlur(e)}
       />
@@ -51,7 +73,7 @@ class TextEdit extends Component {
       className={textClassName}
       onClick={() => this.setEditMode(true)}
     >
-      {value}
+      {this.state.value}
     </span>
   }
 }

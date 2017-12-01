@@ -2,10 +2,10 @@ import React, { Component } from "react"
 import { render} from "react-dom"
 import Modal from "./components/Modal"
 import Alert from "./components/Alert"
-import TextEdit from "./components/TextEdit"
+import SpanEdit from "./components/SpanEdit"
 import TextArea from "./components/TextArea"
 import TextSearch from "./components/TextSearch"
-import "./index.less"
+import "./less/index.less"
 
 class App extends Component {
   constructor(props) {
@@ -26,7 +26,8 @@ class App extends Component {
         </div>
         <div>
           Lorem AAAAA ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut BBBB BBBB labore et dolore magna aliqua.
-          =&gt;<TextEdit
+          =&gt;<SpanEdit
+            value="abc!"
             onChange={(value) => console.log('blur->', value)}
             onBlur={(value) => console.log('blur->', value)}
           />&lt;=
@@ -105,4 +106,4 @@ class App extends Component {
   }
 }
 
-render(<App/>, document.getElementById("root"))
+render(<App/>, document.body)
