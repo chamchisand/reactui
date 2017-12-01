@@ -8,7 +8,7 @@ module.exports = {
     typing: ["babel-polyfill", "./src/typing.js"]
   },
   output: {
-    path: path.join(__dirname, "build"),
+    path: path.join(__dirname, "public"),
     pathinfo: true,
     filename: "[name].js",
     publicPath: "/"
@@ -64,10 +64,10 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ]),
   devServer: {
-    contentBase: path.join(__dirname, "build"),
+    contentBase: path.join(__dirname, "public"),
     compress: true,
-    port: 9000
-    // hot: true
+    port: 9000,
+    hot: true
   },
   performance: {
     hints: false
