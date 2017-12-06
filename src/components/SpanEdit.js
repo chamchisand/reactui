@@ -11,6 +11,10 @@ class TextEdit extends Component {
     onBlur: PropTypes.func
   }
 
+  static defaultProps = {
+    value: ""
+  }
+
   constructor(props) {
     super(props)
 

@@ -67,7 +67,13 @@ module.exports = {
     contentBase: path.join(__dirname, "public"),
     compress: true,
     port: 9000,
-    hot: true
+    hot: true,
+    historyApiFallback: {
+      rewrites: [
+        { from: /^\/typing/, to: '/typing.html' },
+        { from: /./, to: '/index.html' }
+      ]
+    }
   },
   performance: {
     hints: false
