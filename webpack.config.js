@@ -4,8 +4,7 @@ const webpack = require("webpack")
 module.exports = {
   devtool: "inline-source-map",
   entry: {
-    index: ["babel-polyfill", "./src/index.js"],
-    typing: ["babel-polyfill", "./src/typing.js"]
+    index: ["babel-polyfill", "./src/index.js"]
   },
   output: {
     path: path.join(__dirname, "public"),
