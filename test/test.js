@@ -7,7 +7,7 @@ describe('ping', () => {
       method: 'GET',
       url: '/ping'
     }).then(resp => {
-      expect(resp.payload).to.equal('pong')
+      expect(resp.payload).to.equal('pong!')
     })
   })
 })
