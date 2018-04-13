@@ -1,5 +1,7 @@
 const path = require("path")
 const webpack = require("webpack")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
   devtool: "inline-source-map",
@@ -47,36 +49,46 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: [{
-          loader: "style-loader"
-        }, {
-          loader: "css-loader"
-        }, {
-          loader: "less-loader"
-        }]
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [{
+            loader: 'css-loader',
+            options: { minimize: true }
+          },
+          'less-loader']
+        })
+      },
+      {
+        test: /\.pug$/,
+        loader: 'pug-loader'
       }
     ]
   },
   plugins: ([
+    new ExtractTextPlugin({
+      filename: '/index.css',
+      allChunks: true
+    }),
     new webpack.DefinePlugin({
       "process.env": {
         "NODE_ENV": JSON.stringify(process.env.NODE_ENV)
       }
     }),
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new HtmlWebpackPlugin({
+      filename: path.resolve("public", "index.html"),
+      template: path.join(__dirname, "templates/index.pug"),
+      cache: false,
+      inject: false,
+      hash: true
+    }),
   ]),
   devServer: {
     contentBase: path.join(__dirname, "public"),
-    compress: true,
     port: 9000,
     hot: true,
-    historyApiFallback: {
-      rewrites: [
-        { from: /^\/typing/, to: '/typing.html' },
-        { from: /./, to: '/index.html' }
-      ]
-    }
+    inline: true,
+    historyApiFallback: true,
+    publicPath: "/"
   },
   performance: {
     hints: false
