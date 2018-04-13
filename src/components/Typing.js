@@ -12,7 +12,7 @@ class Typing extends Component {
   constructor(props) {
     super(props)
 
-    let paragraph = this.props.paragraph.replace(/^\s+|\s+$/g, '')
+    const paragraph = this.props.paragraph.replace(/^\s+|\s+$/g, '')
     this.chars = paragraph.split('').map(value => {
       return {
         value,
@@ -26,6 +26,7 @@ class Typing extends Component {
       pos: 0,
       startTs: 0,
       elapsed: 0,
+      errorCount: 0,
       running: false
     }
 
@@ -57,7 +58,7 @@ class Typing extends Component {
   }
 
   prevWord(pos, highlight) {
-    let word = []
+    const word = []
 
     while (this.chars[pos] && this.chars[pos].value !== ' ') {
       word.push(this.chars[pos--])
@@ -67,7 +68,7 @@ class Typing extends Component {
   }
 
   nextWord(pos, highlight) {
-    let word = []
+    const word = []
 
     while (this.chars[pos] && this.chars[pos].value !== ' ') {
       word.push(this.chars[pos++])
@@ -77,8 +78,8 @@ class Typing extends Component {
   }
 
   handleKeyDown(e) {
-    let { pos, running, startTs } = this.state
-    let chars = this.chars
+    let { pos, running, startTs, errorCount } = this.state
+    const chars = this.chars
 
     if (pos >= chars.length) {
       return
@@ -113,7 +114,14 @@ class Typing extends Component {
     } else if (isPrintableKey(e.keyCode)) {
       if (chars[pos]) {
         chars[pos].typed = e.key
-        chars[pos].status = chars[pos].value === e.key ? 'ok' : 'warn'
+
+        if (chars[pos].value === e.key) {
+          chars[pos].status = 'ok'
+        } else {
+          chars[pos].status = 'warn'
+          errorCount++
+        }
+
         pos++
 
         if (chars[pos]) {
@@ -134,13 +142,14 @@ class Typing extends Component {
     this.setState({
       pos,
       startTs,
-      running
+      running,
+      errorCount
     })
   }
 
   render() {
-    const { pos, elapsed } = this.state
-    const errorCount = this.chars.filter(char => char.status === 'warn').length
+    const { pos, elapsed, errorCount } = this.state
+    // const errorCount = this.chars.filter(char => char.status === 'warn').length
     const wpm = netWpm(pos, errorCount, elapsed)
 
     return (
@@ -151,7 +160,7 @@ class Typing extends Component {
         <p>Time: {(elapsed / 1000).toFixed(2)} sec</p>
         <p>
           {this.chars.map((char, key) => {
-            let className = []
+            const className = []
 
             if (pos === key) {
               className.push('cursor')
@@ -177,7 +186,7 @@ class Typing extends Component {
             return <span key={key}>{char.typed === ' ' ? '_' : char.typed}</span>
           })}
         </p>
-			</div>
+      </div>
     )
   }
 }

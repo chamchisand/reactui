@@ -1,8 +1,8 @@
-export default (keycode) => {
-  return (keycode > 47 && keycode < 58) || // number keys
-    keycode == 32 ||
-    (keycode > 64 && keycode < 91)   || // letter keys
-    (keycode > 95 && keycode < 112)  || // numpad keys
-    (keycode > 185 && keycode < 193) || // ;=,-./` (in order)
-    (keycode > 218 && keycode < 223);   // [\]' (in order)
+export default (keyCode) => {
+  return keyCode === 32 || // space
+    (keyCode > 47 && keyCode < 58) || // number keys
+    (keyCode > 64 && keyCode < 91)   || // letter keys
+    (keyCode > 95 && keyCode < 112)  || // numpad keys
+    (keyCode > 185 && keyCode < 193) || // ;=,-./` (in order)
+    (keyCode > 218 && keyCode < 223);   // [\]' (in order)
 }

@@ -29,7 +29,7 @@ class Modal extends Component {
   }
 
   render() {
-    let {
+    const {
       baseClassName = "x-modal",
       title,
       close = true,
@@ -52,15 +52,15 @@ class Modal extends Component {
             onClick={(e) => e.stopPropagation()}
           >
             <div className={`${baseClassName}-content`}>
-               <div className={`${baseClassName}-header`}>
+              <div className={`${baseClassName}-header`}>
                 {title && <h5 className={`${baseClassName}-title`}>{title}</h5>}
                 {close !== false && (
                   React.isValidElement(close)
                     ? React.cloneElement(close, {onClick: this.close})
                     : (
-                        <button type="button" className="close" onClick={this.close}>
-                          <span>&times;</span>
-                        </button>
+                      <button type="button" className="close" onClick={this.close}>
+                        <span>&times;</span>
+                      </button>
                     )
                 )}
               </div>

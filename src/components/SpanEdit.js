@@ -59,7 +59,7 @@ class TextEdit extends Component {
   }
 
   render() {
-    let { name, className, textClassName ="editable" } = this.props
+    const { name, className, textClassName ="editable" } = this.props
 
     if (this.state.editable) {
       return <input

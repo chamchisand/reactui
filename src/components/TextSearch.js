@@ -22,19 +22,19 @@ class TextSearch extends Component {
 
   clear() {
     while(this.highlighted.length > 0) {
-      let node = this.highlighted.pop()
-      let tmpNode = node.tmpNodes[0]
+      const node = this.highlighted.pop()
+      const tmpNode = node.tmpNodes[0]
       tmpNode.parentNode.insertBefore(node.original, tmpNode)
       node.tmpNodes.forEach(node => node.remove())
     }
   }
 
   search(node) {
-    let childNodes = node.childNodes || []
+    const childNodes = node.childNodes || []
     let found = []
 
     childNodes.forEach((node) => {
-      let nodeName = node.nodeName.toUpperCase()
+      const nodeName = node.nodeName.toUpperCase()
 
       if (['BUTTON', 'TEXTAREA'].indexOf(nodeName) === -1) {
         if (nodeName === '#TEXT') {
@@ -51,17 +51,17 @@ class TextSearch extends Component {
   }
 
   highlight(nodes) {
-    let options = this.props.caseSensitive ? 'i' : ''
-    let re = new RegExp(this.value, options)
+    const options = this.props.caseSensitive ? 'i' : ''
+    const re = new RegExp(this.value, options)
 
     nodes.forEach(node => {
-      let parts = node.data.split(re)
-      let tmpNodes = []
+      const parts = node.data.split(re)
+      const tmpNodes = []
       let pos = 0
 
       parts.forEach((part, index) => {
         if (index > 0) {
-          let span = document.createElement('span')
+          const span = document.createElement('span')
           span.innerHTML = node.data.substr(pos, this.value.length)
           span.classList.add('highlight')
           node.parentNode.insertBefore(span, node)
@@ -69,7 +69,7 @@ class TextSearch extends Component {
           pos += this.value.length
         }
 
-        let textNode = document.createTextNode(part)
+        const textNode = document.createTextNode(part)
         node.parentNode.insertBefore(textNode, node)
         tmpNodes.push(textNode)
         pos += part.length
@@ -91,8 +91,7 @@ class TextSearch extends Component {
       this.clear()
 
       if (this.value) {
-        let nodes = this.search(this.props.node)
-        this.highlight(nodes)
+        this.highlight(this.search(this.props.node))
       }
     }
   }

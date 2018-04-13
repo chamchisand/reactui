@@ -25,12 +25,12 @@ class Alert extends Component {
   }
 
   render() {
-    let {
+    const {
       baseClassName = "x-alert",
       title,
       message,
       ok = "OK!",
-      cancel = "Cancel"
+      cancel = "Cancel",
     } = this.props
 
     return (

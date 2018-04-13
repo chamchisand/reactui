@@ -9,7 +9,7 @@ class Backdrop extends Component {
   }
 
   render() {
-    let { baseClassName = "x-backdrop", backdrop = true } = this.props
+    const { baseClassName = "x-backdrop", backdrop = true } = this.props
 
     if (!backdrop) {
       return null
