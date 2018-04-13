@@ -1,3 +1,5 @@
+process.env.NODE_ENV = process.env.NODE_ENV || 'development'
+
 const Hapi = require('hapi')
 const Vision = require('vision')
 const Pug = require('pug')
@@ -6,18 +8,30 @@ const server = Hapi.server({
   host: 'localhost'
 })
 
-const start = async () => {
-  process.env.NODE_ENV = process.env.NODE_ENV || 'development'
-  const prod = process.env.NODE_ENV === 'production'
+server.route({
+  method: 'GET',
+  path: '/ping',
+  handler: () => {
+    return 'pong'
+  }
+})
 
+server.route({
+  method: 'GET',
+  path: '/',
+  handler: (request, h) => {
+    return h.view('index')
+  }
+})
+
+const start = async () => {
   await server.register(require('inert'))
   await server.register(Vision)
 
   server.views({
     engines: { pug: Pug },
     relativeTo: __dirname,
-    path: 'templates',
-    isCached: prod
+    path: 'templates'
   })
 
   server.route({
@@ -30,22 +44,6 @@ const start = async () => {
     }
   })
 
-  server.route({
-    method: 'GET',
-    path: '/ping',
-    handler: () => {
-      return 'pong'
-    }
-  })
-
-  server.route({
-    method: 'GET',
-    path: '/',
-    handler: (request, h) => {
-      return h.view('index')
-    }
-  })
-
   await server.start()
   console.log(`Server running at: ${server.info.uri}`)
 }
@@ -55,4 +53,8 @@ process.on('unhandledRejection', (err) => {
   process.exit(1)
 })
 
-start()
+if (!module.parent) {
+  start()
+}
+
+module.exports = server
