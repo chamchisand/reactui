@@ -1,11 +1,11 @@
 import React, { Component } from "react"
 import { render} from "react-dom"
-import Modal from "./components/Modal"
-import Alert from "./components/Alert"
-import SpanEdit from "./components/SpanEdit"
-import TextArea from "./components/TextArea"
-import TextSearch from "./components/TextSearch"
-import "./less/index.less"
+import Modal from "components/Modal"
+import Alert from "components/Alert"
+import SpanEdit from "components/SpanEdit"
+import TextArea from "components/TextArea"
+import TextSearch from "components/TextSearch"
+import "less/index.less"
 
 class App extends Component {
   constructor(props) {

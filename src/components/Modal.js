@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import Backdrop from "./Backdrop"
+import Backdrop from "components/Backdrop"
 
 class Modal extends Component {
   static propTypes = {

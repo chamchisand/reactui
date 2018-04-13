@@ -15,8 +15,12 @@ module.exports = {
   },
   resolve: {
     modules: ["node_modules"],
-    extensions: [".js"],
-    alias: {}
+    extensions: [".js", ".less"],
+    alias: {
+      components: path.join(__dirname, "src/components"),
+      middleware: path.join(__dirname, "src/middleware"),
+      less: path.join(__dirname, "src/less")
+    }
   },
   module: {
     rules: [

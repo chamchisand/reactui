@@ -1,8 +1,8 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import isPrintableKey from "../middleware/isPrintableKey"
-import { netWpm } from "../middleware/wpm"
-import Span from "./Span"
+import isPrintableKey from "middleware/isPrintableKey"
+import { netWpm } from "middleware/wpm"
+import Span from "components/Span"
 
 class Typing extends Component {
   static propTypes = {
