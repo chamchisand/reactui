@@ -13,6 +13,7 @@ class Typing extends Component {
     super(props)
 
     const paragraph = this.props.paragraph.replace(/^\s+|\s+$/g, '')
+
     this.chars = paragraph.split('').map(value => {
       return {
         value,
@@ -181,11 +182,11 @@ class Typing extends Component {
             />
           })}
         </p>
-        <p>
+        {/*<p>
           {this.chars.map((char, key) => {
             return <span key={key}>{char.typed === ' ' ? '_' : char.typed}</span>
           })}
-        </p>
+        </p>*/}
       </div>
     )
   }
