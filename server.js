@@ -8,21 +8,8 @@ const server = Hapi.server({
   host: 'localhost'
 })
 
-server.route({
-  method: 'GET',
-  path: '/ping',
-  handler: () => {
-    return 'pong'
-  }
-})
-
-server.route({
-  method: 'GET',
-  path: '/',
-  handler: (request, h) => {
-    return h.view('index')
-  }
-})
+server.route(require('./routes/ping'))
+server.route(require('./routes/word'))
 
 const start = async () => {
   await server.register(require('inert'))
@@ -41,6 +28,14 @@ const start = async () => {
       directory: {
         path: 'public'
       }
+    }
+  })
+
+  server.route({
+    method: 'GET',
+    path: '/',
+    handler: (request, h) => {
+      return h.view('index')
     }
   })
 
