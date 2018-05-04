@@ -48,7 +48,7 @@
     "webpack-dev-server": "^2.9.4"
   },
   "dependencies": {
-    "hapi": "^17.3.1",
+    "hapi": "^17.4.0",
     "inert": "^5.1.0",
     "pug": "^2.0.3",
     "vision": "^5.3.2"
